@@ -1,8 +1,10 @@
 //? --------------------------------------Importaciones
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import router from "./routes/index.routes.js";
-import "dotenv/config";
+import { initDB } from "./config/db.js";
+initDB();
 
 const app = express();
 const PORT = process.env.PORT;
