@@ -3,27 +3,36 @@ import { DataTypes } from "sequelize";
 
 export const carModel = sequelize.define("Car", {
   marca: {
-    type: DataTypes.STRING(),
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   modelo: {
-    type: DataTypes.STRING(),
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   anio: {
-    type: DataTypes.INTEGER(),
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
   precio: {
-    type: DataTypes.FLOAT(),
+    type: DataTypes.FLOAT,
+    allowNull: false,
   },
   kilometraje: {
-    type: DataTypes.INTEGER(),
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
   },
   estado: {
     type: DataTypes.ENUM(["Nuevo", "Usado"]),
+    allowNull: false,
   },
-  description: {
-    type: DataTypes.TEXT(),
+  descripcion: {
+    type: DataTypes.TEXT,
+    allowNull: true,
   },
   imgURL: {
-    type: DataTypes.STRING(),
+    type: DataTypes.STRING,
+    allowNull: true,
   },
 });
