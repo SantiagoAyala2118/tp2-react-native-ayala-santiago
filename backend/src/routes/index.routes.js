@@ -1,8 +1,8 @@
 import { Router } from "express";
-import apiRouter from "./api.routes.js";
+import carRouter from "./car.routes.js";
 
 const router = Router();
 
-router.use(apiRouter);
+router.use(carRouter);
 
 export default router;
