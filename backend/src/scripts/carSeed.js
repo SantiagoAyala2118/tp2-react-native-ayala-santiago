@@ -97,7 +97,7 @@ const seedDatabase = async () => {
     console.log("Tabla 'Cars' sincronizada correctamente.");
 
     //* Funcion para crear todos los registros de una
-    await carModel.bulkCreate(autosDeLujo);
+    await CarModel.bulkCreate(autosDeLujo);
     console.log(
       "¡Seeding completado! Tus naves de lujo ya están en la base de datos.",
     );
