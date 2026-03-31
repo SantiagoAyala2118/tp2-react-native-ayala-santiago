@@ -1,7 +1,7 @@
 import { sequelize } from "../config/database.js";
 import { DataTypes } from "sequelize";
 
-export const carModel = sequelize.define("Car", {
+export const CarModel = sequelize.define("Car", {
   marca: {
     type: DataTypes.STRING,
     allowNull: false,
