@@ -18,12 +18,12 @@ carRouter.get("/cars", getCars);
 carRouter.get("/car/:carId", getCarById);
 
 //* Crear recurso
-carRouter.post("/create-car", createCar);
+carRouter.post("/car", createCar);
 
 //* Actualizar un recurso
-carRouter.put("/update-car/:carId", updateCar);
+carRouter.put("/car/update/:carId", updateCar);
 
 //* Eliminar un recurso
-carRouter.delete("/remove-car/:carId", removeCar);
+carRouter.delete("/car/remove/:carId", removeCar);
 
 export default carRouter;
