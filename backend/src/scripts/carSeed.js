@@ -1,7 +1,7 @@
 // scripts/carSeed.js
 import "dotenv/config";
 import { sequelize } from "../config/database.js";
-import { carModel } from "../models/carModel.js";
+import { CarModel } from "../models/car.model.js";
 
 const autosDeLujo = [
   {
