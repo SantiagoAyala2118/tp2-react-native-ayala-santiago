@@ -15,15 +15,15 @@ const carRouter = Router();
 carRouter.get("/cars", getCars);
 
 //* Listar por id
-carRouter.get("/car/:id", getCarById);
+carRouter.get("/car/:carId", getCarById);
 
 //* Crear recurso
 carRouter.post("/create-car", createCar);
 
 //* Actualizar un recurso
-carRouter.put("/update-car/:id", updateCar);
+carRouter.put("/update-car/:carId", updateCar);
 
 //* Eliminar un recurso
-carRouter.delete("/remove-car/:id", removeCar);
+carRouter.delete("/remove-car/:carId", removeCar);
 
 export default carRouter;
