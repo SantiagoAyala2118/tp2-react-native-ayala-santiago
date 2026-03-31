@@ -1,8 +1,10 @@
 //? ----------------------------------------------Importaciones
-import { carModel } from "../models/car.model.js";
+import { CarModel } from "../models/car.model.js";
 import { matchedData } from "express-validator";
 
 //? ---------------------------------------------- Controladores
+
+//* Crear auto
 export const createCar = async (req, res) => {
   try {
     //    const validatedData = matchedData(req.body);
@@ -22,9 +24,12 @@ export const createCar = async (req, res) => {
   }
 };
 
+//* Listar los autos
 export const getCars = async (req, res) => {
   try {
-    const cars = await carModel.findAll();
+    const cars = await carModel.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
 
     return res.status(200).json({
       ok: true,
@@ -40,8 +45,68 @@ export const getCars = async (req, res) => {
   }
 };
 
-export const getCarById = async (req, res) => {};
+//* Traer auto por ID
+export const getCarById = async (req, res) => {
+  try {
+    const { carId } = req.params;
 
-export const updateCar = async (req, res) => {};
+    const car = await CarModel.findByPk(carId, {
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    });
 
-export const removeCar = async (req, res) => {};
+    return res.status(200).json({
+      ok: true,
+      msg: "Auto encontrado",
+      data: car,
+    });
+  } catch (err) {
+    console.error("Error trayendo el auto", err);
+    return res.status(500).json({
+      ok: false,
+      msg: "Error interno del servidor",
+    });
+  }
+};
+
+//* Actualizar un auto
+export const updateCar = async (req, res) => {
+  try {
+    const { carId } = req.params;
+
+    await CarModel.update(req.body, { where: { carId } });
+
+    const updatedCar = await CarModel.findByPk(carId);
+
+    return res.status(200).json({
+      ok: true,
+      msg: "Campos del auto actualizado con exito",
+      data: updatedCar,
+    });
+  } catch (err) {
+    console.error("Error actualizando un auto", err);
+    return res.status(500).json({
+      ok: false,
+      msg: "Error interno del servidor",
+    });
+  }
+};
+
+//* Eliminar un auto
+export const removeCar = async (req, res) => {
+  try {
+    const { carId } = req.params;
+
+    await CarModel.destroy({ where: { carId } });
+
+    return res.status(410).json({
+      ok: true,
+      msg: "Auto eliminado de la base de datos",
+    });
+  } catch (err) {
+    console.error("Error eliminando un auto", err);
+    return res.status(500).json({
+      ok: false,
+      msg: "Error interno del servidor",
+    });
+  }
+};
