@@ -73,13 +73,13 @@ export const updateCar = async (req, res) => {
   try {
     const { carId } = req.params;
 
-    await CarModel.update(req.body, { where: { carId } });
+    await CarModel.update(req.body, { where: { id: carId } });
 
     const updatedCar = await CarModel.findByPk(carId);
 
     return res.status(200).json({
       ok: true,
-      msg: "Campos del auto actualizado con exito",
+      msg: "Campos del auto actualizados con exito",
       data: updatedCar,
     });
   } catch (err) {
@@ -96,7 +96,7 @@ export const removeCar = async (req, res) => {
   try {
     const { carId } = req.params;
 
-    await CarModel.destroy({ where: { carId } });
+    await CarModel.destroy({ where: { id: carId } });
 
     return res.status(410).json({
       ok: true,
