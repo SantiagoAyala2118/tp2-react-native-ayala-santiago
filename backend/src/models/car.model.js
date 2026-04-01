@@ -31,8 +31,8 @@ export const CarModel = sequelize.define("Car", {
     type: DataTypes.TEXT,
     allowNull: true,
   },
-  imgURL: {
-    type: DataTypes.STRING,
+  imagenes: {
+    type: DataTypes.JSON,
     allowNull: true,
   },
 });

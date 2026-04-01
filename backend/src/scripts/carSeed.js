@@ -13,8 +13,11 @@ const autosDeLujo = [
     estado: "Usado",
     descripcion:
       "Motor V10 atmosférico, color Giallo Inti. Un verdadero misil tierra-tierra con tracción integral.",
-    imgURL:
-      "https://images.unsplash.com/photo-1544636331-e26879cd3d92?auto=format&fit=crop&w=800&q=80",
+    imagenes: [
+      "/img/imagenLamboEvo1.jpg",
+      "/img/imagenLamboEvo2.jpg",
+      "/img/imagenLamboEvo3.jpg",
+    ],
   },
   {
     marca: "Ferrari",
@@ -25,8 +28,11 @@ const autosDeLujo = [
     estado: "Nuevo",
     descripcion:
       "El V8 más potente de la historia de Ferrari. Diseño aerodinámico impecable en el clásico Rosso Corsa.",
-    imgURL:
-      "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=800&q=80",
+    imagenes: [
+      "/img/ferrariF8Tributo1.jpg",
+      "/img/ferrariF8Tributo2.jpg",
+      "/img/ferrariF8Tributo3.jpg",
+    ],
   },
   {
     marca: "Porsche",
@@ -37,8 +43,11 @@ const autosDeLujo = [
     estado: "Nuevo",
     descripcion:
       "Nacido para la pista pero legal para la calle. Aerodinámica activa y un motor bóxer que grita a 9.000 RPM.",
-    imgURL:
-      "https://images.unsplash.com/photo-1503376710356-748c1f09c258?auto=format&fit=crop&w=800&q=80",
+    imagenes: [
+      "/img/porsche911Gt3_1.jpg",
+      "/img/porsche911Gt3_2.jpg",
+      "/img/porsche911Gt3_3.jpg",
+    ],
   },
   {
     marca: "McLaren",
@@ -49,8 +58,11 @@ const autosDeLujo = [
     estado: "Usado",
     descripcion:
       "Ingeniería británica en su máxima expresión. Chasis de fibra de carbono y puertas diédricas.",
-    imgURL:
-      "https://images.unsplash.com/photo-1621007947382-bb3c399b52c5?auto=format&fit=crop&w=800&q=80",
+    imagenes: [
+      "/img/mclaren720s_1.jpg",
+      "/img/mclaren720s_2.jpg",
+      "/img/mclaren720s_3.jpg",
+    ],
   },
   {
     marca: "Aston Martin",
@@ -61,8 +73,11 @@ const autosDeLujo = [
     estado: "Usado",
     descripcion:
       "Elegancia y agresividad. Un gran turismo con alma de deportivo puro y un sonido de escape inconfundible.",
-    imgURL:
-      "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&w=800&q=80",
+    imagenes: [
+      "/img/astonMartinVantage_1.jpg",
+      "/img/astonMartinVantage_2.jpg",
+      "/img/astonMartinVantage_3.jpg",
+    ],
   },
   {
     marca: "Bugatti",
@@ -73,8 +88,11 @@ const autosDeLujo = [
     estado: "Nuevo",
     descripcion:
       "La cúspide de la ingeniería automotriz. Motor W16 con cuatro turbos capaz de superar los 400 km/h con total lujo.",
-    imgURL:
-      "https://images.unsplash.com/photo-1600832019566-b33346e2a9b7?auto=format&fit=crop&w=800&q=80",
+    imagenes: [
+      "/img/bugatiChironSuperSport_1.jpg",
+      "/img/bugatiChironSuperSport_2.jpg",
+      "/img/bugatiChironSuperSport_3.jpg",
+    ],
   },
   {
     marca: "Mercedes-AMG",
@@ -85,8 +103,11 @@ const autosDeLujo = [
     estado: "Usado",
     descripcion:
       "El rey de Nürburgring. Aerodinámica extrema derivada de la categoría GT3 y un V8 biturbo brutal.",
-    imgURL:
-      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80",
+    imagenes: [
+      "/img/mercedesAMGGTBlackSeries_1.jpg",
+      "/img/mercedesAMGGTBlackSeries_2.jpg",
+      "/img/mercedesAMGGTBlackSeries_3.jpg",
+    ],
   },
 ];
 
