@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import VehicleCard from "./components/VehicleCar";
+import VehicleCard from "./components/VehicleCard";
+import "./App.css";
 
 function App() {
   const [cars, setCars] = useState([]);
