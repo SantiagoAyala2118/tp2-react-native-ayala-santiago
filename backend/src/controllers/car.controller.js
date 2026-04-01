@@ -27,7 +27,7 @@ export const createCar = async (req, res) => {
 //* Listar los autos
 export const getCars = async (req, res) => {
   try {
-    const cars = await carModel.findAll({
+    const cars = await CarModel.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
 
