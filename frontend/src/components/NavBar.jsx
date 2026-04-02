@@ -30,8 +30,12 @@ const NavBar = ({ onAddClick }) => {
           Inicio
         </a>
         <a
-          href="/vehiculos"
-          className="text-[11px] tracking-wider uppercase text-[#4A5C6A] px-3 py-1.5 rounded-md hover:text-[#9BA8AB] hover:bg-[#1E3040] transition-colors no-underline"
+          onClick={() =>
+            document
+              .getElementById("flota")
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+          className="text-[11px] tracking-wider uppercase text-[#4A5C6A] px-3 py-1.5 rounded-md cursor-pointer hover:text-[#9BA8AB] hover:bg-[#1E3040] transition-colors no-underline"
         >
           Vehículos
         </a>
