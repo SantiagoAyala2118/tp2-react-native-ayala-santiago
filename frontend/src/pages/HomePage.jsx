@@ -84,7 +84,7 @@ const HomePage = () => {
             fontSize: "clamp(3.5rem, 8vw, 6rem)",
           }}
         >
-          Flota de <span className="text-[#4A5C6A]">Lujo</span> Premium
+          Velocidad<span className="text-[#4A5C6A]">.Lujo.</span>Poder
         </h1>
 
         {/* Subtítulo */}
