@@ -8,6 +8,7 @@ const useCarForm = (vehicle = null, onSuccess) => {
     anio: vehicle?.anio ?? "",
     precio: vehicle?.precio ?? "",
     kilometraje: vehicle?.kilometraje ?? "",
+    imagen: vehicle?.imagenes?.[0] ?? "",
     estado: vehicle?.estado ?? "Nuevo",
     descripcion: vehicle?.descripcion ?? "",
   });
@@ -42,16 +43,27 @@ const useCarForm = (vehicle = null, onSuccess) => {
     setError(null);
 
     try {
+      const payload = {
+        marca: formData.marca,
+        modelo: formData.modelo,
+        anio: Number(formData.anio),
+        precio: Number(formData.precio),
+        kilometraje: Number(formData.kilometraje),
+        estado: formData.estado,
+        descripcion: formData.descripcion,
+        imagenes: formData.imagen ? [formData.imagen] : [],
+      };
+
       const url = vehicle
-        ? `http://localhost:3000/api/cars/${vehicle.id}`
-        : "http://localhost:3000/api/cars";
+        ? `http://localhost:3000/api/car/update/${vehicle.id}`
+        : "http://localhost:3000/api/car";
 
       const method = vehicle ? "PUT" : "POST";
 
       await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       onSuccess();
