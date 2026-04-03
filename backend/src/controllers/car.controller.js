@@ -9,7 +9,7 @@ export const createCar = async (req, res) => {
   try {
     //    const validatedData = matchedData(req.body);
 
-    const newCar = await carModel.create(req.body);
+    const newCar = await CarModel.create(req.body);
     return res.status(201).json({
       ok: true,
       msg: "Auto creado con exito",
