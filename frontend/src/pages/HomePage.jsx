@@ -2,11 +2,15 @@
 import { useState, useEffect } from "react";
 import VehicleCard from "../components/VehicleCard";
 import Loading from "../components/Loading";
+import FilterBar from "../components/FilterBar";
+import useFilter from "../hooks/useFilter";
 
 const HomePage = () => {
   const [cars, setCars] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { query, setQuery, filtered } = useFilter(cars);
 
   const getCars = async () => {
     setLoading(true);
@@ -122,24 +126,7 @@ const HomePage = () => {
         </p>
 
         {/* Búsqueda */}
-        <div className="flex items-center gap-2 bg-[#11212D]/80 border border-[#9BA8AB]/10 rounded-lg px-4 py-2.5 max-w-sm mb-8">
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#4A5C6A"
-            strokeWidth="2"
-          >
-            <circle cx="11" cy="11" r="8" />
-            <path d="m21 21-4.35-4.35" />
-          </svg>
-          <input
-            type="text"
-            placeholder="Buscar por marca o modelo..."
-            className="bg-transparent border-none outline-none text-[#9BA8AB] text-sm w-full placeholder-[#4A5C6A]"
-          />
-        </div>
+        <FilterBar query={query} onChange={setQuery} />
 
         {/* Cards */}
         {error ? (
@@ -149,7 +136,7 @@ const HomePage = () => {
         ) : loading ? (
           <Loading />
         ) : (
-          <VehicleCard data={cars} />
+          <VehicleCard data={filtered} />
         )}
       </div>
     </div>
