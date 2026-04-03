@@ -1,6 +1,7 @@
 import HomePage from "./pages/HomePage";
 import NavBar from "./components/NavBar";
 import "./App.css";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <main className="relative z-10">
         <HomePage />
       </main>
+      <Footer />
     </div>
   );
 }
