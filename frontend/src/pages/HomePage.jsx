@@ -4,13 +4,19 @@ import VehicleCard from "../components/VehicleCard";
 import Loading from "../components/Loading";
 import FilterBar from "../components/FilterBar";
 import useFilter from "../hooks/useFilter";
+import CarForm from "../components/CarForm";
 
 const HomePage = () => {
   const [cars, setCars] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  //* Filtro
   const { query, setQuery, filtered } = useFilter(cars);
+
+  //* Formulario
+  const [showForm, setShowForm] = useState(false);
+  const [vehicleToEdit, setVehicleToEdit] = useState(null);
 
   const getCars = async () => {
     setLoading(true);
@@ -30,6 +36,33 @@ const HomePage = () => {
   useEffect(() => {
     getCars();
   }, []);
+
+  //? Funcion para mostrar el formulario al editar un vehiculo
+  const handleEdit = (vehicle) => {
+    setVehicleToEdit(vehicle);
+    setShowForm(true);
+  };
+
+  //? Funcion para eliminar un vehiculo
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:3000/api/car/remove/${id}`, {
+        method: "DELETE",
+      });
+
+      getCars();
+    } catch (err) {
+      setError(true);
+      console.error("Error eliminando un vehiculo", err);
+      return;
+    }
+  };
+
+  //? Funcion para cerrar el formulario
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setVehicleToEdit(null);
+  };
 
   return (
     <div>
@@ -72,7 +105,13 @@ const HomePage = () => {
           >
             Ver flota
           </button>
-          <button className="text-[11px] tracking-[1.5px] uppercase text-[#9BA8AB] px-6 py-2.5 rounded-xl border border-[#9BA8AB]/20 hover:border-[#9BA8AB]/40 hover:text-[#CCD0CF] transition-all">
+          <button
+            className="text-[11px] tracking-[1.5px] uppercase text-[#9BA8AB] px-6 py-2.5 rounded-xl border border-[#9BA8AB]/20 hover:border-[#9BA8AB]/40 hover:text-[#CCD0CF] transition-all"
+            onClick={() => {
+              setShowForm(true);
+              setVehicleToEdit(null);
+            }}
+          >
             + Agregar vehículo
           </button>
         </div>
@@ -136,9 +175,22 @@ const HomePage = () => {
         ) : loading ? (
           <Loading />
         ) : (
-          <VehicleCard data={filtered} />
+          <VehicleCard
+            data={filtered}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
         )}
       </div>
+
+      {/*Formulario*/}
+      {showForm && (
+        <CarForm
+          vehicle={vehicleToEdit}
+          onSuccess={getCars}
+          onClose={handleCloseForm}
+        />
+      )}
     </div>
   );
 };
