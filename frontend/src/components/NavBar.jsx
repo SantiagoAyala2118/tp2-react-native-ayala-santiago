@@ -44,23 +44,6 @@ const NavBar = ({ onAddClick }) => {
         <div className="w-px h-4 bg-[#1E3040] mx-2" />
 
         {/* Botón agregar */}
-        <button
-          onClick={onAddClick}
-          className="flex items-center gap-1.5 text-[11px] tracking-wider uppercase font-medium bg-[#CCD0CF] text-[#06141B] px-4 py-2 rounded-lg hover:opacity-85 transition-opacity"
-        >
-          <svg
-            width="11"
-            height="11"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-          >
-            <line x1="12" y1="5" x2="12" y2="19" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
-          Agregar
-        </button>
       </nav>
     </header>
   );
