@@ -4,6 +4,7 @@ import { sequelize } from "../config/database.js";
 import { CarModel } from "../models/car.model.js";
 
 const autosDeLujo = [
+  // --- TUS 7 AUTOS ORIGINALES ---
   {
     marca: "Lamborghini",
     modelo: "Huracán EVO",
@@ -109,18 +110,134 @@ const autosDeLujo = [
       "/img/mercedesAMGGTBlackSeries_3.jpg",
     ],
   },
+  {
+    marca: "Rolls-Royce",
+    modelo: "Ghost",
+    anio: 2023,
+    precio: 340000,
+    kilometraje: 1500,
+    estado: "Usado",
+    descripcion:
+      "El pináculo del lujo automotriz. Suspensión de alfombra mágica y un interior inigualable con techo estrellado.",
+    imagenes: [
+      "/img/rollsRoyceGhost_1.jpg",
+      "/img/rollsRoyceGhost_2.jpg",
+      "/img/rollsRoyceGhost_3.jpg",
+    ],
+  },
+  {
+    marca: "Audi",
+    modelo: "R8 V10 Performance",
+    anio: 2024,
+    precio: 250000,
+    kilometraje: 0,
+    estado: "Nuevo",
+    descripcion:
+      "El superdeportivo de uso diario por excelencia. Motor V10 atmosférico que comparte corazón con Lamborghini.",
+    imagenes: ["/img/audiR8_1.jpg", "/img/audiR8_2.jpg", "/img/audiR8_3.jpg"],
+  },
+  {
+    marca: "Koenigsegg",
+    modelo: "Jesko",
+    anio: 2023,
+    precio: 3000000,
+    kilometraje: 500,
+    estado: "Usado",
+    descripcion:
+      "Una obra maestra de la ingeniería sueca. Más de 1600 HP diseñados para romper récords mundiales de velocidad.",
+    imagenes: [
+      "/img/koenigseggJesko_1.jpg",
+      "/img/koenigseggJesko_2.jpg",
+      "/img/koenigseggJesko_3.jpg",
+    ],
+  },
+  {
+    marca: "Pagani",
+    modelo: "Huayra Roadster",
+    anio: 2021,
+    precio: 2800000,
+    kilometraje: 3200,
+    estado: "Usado",
+    descripcion:
+      "Arte sobre ruedas. Detalles en titanio, fibra de carbono expuesta y un motor V12 biturbo firmado por AMG.",
+    imagenes: [
+      "/img/paganiHuayra_1.jpg",
+      "/img/paganiHuayra_2.jpg",
+      "/img/paganiHuayra_3.jpg",
+    ],
+  },
+  {
+    marca: "Bentley",
+    modelo: "Continental GT",
+    anio: 2024,
+    precio: 280000,
+    kilometraje: 0,
+    estado: "Nuevo",
+    descripcion:
+      "El equilibrio perfecto entre rendimiento explosivo y lujo artesanal inigualable para viajar en primera clase.",
+    imagenes: [
+      "/img/bentleyContinental_1.jpg",
+      "/img/bentleyContinental_2.jpg",
+      "/img/bentleyContinental_3.jpg",
+    ],
+  },
+  {
+    marca: "Maserati",
+    modelo: "MC20",
+    anio: 2023,
+    precio: 220000,
+    kilometraje: 1200,
+    estado: "Usado",
+    descripcion:
+      "El renacimiento deportivo de Maserati. Chasis ultraligero y el innovador motor Nettuno V6 con tecnología de F1.",
+    imagenes: [
+      "/img/maseratiMC20_1.jpg",
+      "/img/maseratiMC20_2.jpg",
+      "/img/maseratiMC20_3.jpg",
+    ],
+  },
+  {
+    marca: "Nissan",
+    modelo: "GT-R Nismo",
+    anio: 2022,
+    precio: 210000,
+    kilometraje: 8000,
+    estado: "Usado",
+    descripcion:
+      "El legendario Godzilla en su máxima expresión. Ingeniería de precisión japonesa enfocada en la eficacia en pista.",
+    imagenes: [
+      "/img/nissanGTR_1.jpg",
+      "/img/nissanGTR_2.jpg",
+      "/img/nissanGTR_3.jpg",
+    ],
+  },
+  {
+    marca: "Lexus",
+    modelo: "LFA",
+    anio: 2012,
+    precio: 950000,
+    kilometraje: 25000,
+    estado: "Usado",
+    descripcion:
+      "Una leyenda automotriz. Considerado por muchos como el auto con el mejor sonido de escape de la historia gracias a su V10 desarrollado por Yamaha.",
+    imagenes: [
+      "/img/lexusLFA_1.jpg",
+      "/img/lexusLFA_2.jpg",
+      "/img/lexusLFA_3.jpg",
+    ],
+  },
 ];
 
 const seedDatabase = async () => {
   try {
-    //* Si existen rejistros, los borra y los crea de nuevo (solo para desarrollo)
+    //* Si existen registros, los borra y los crea de nuevo (solo para desarrollo)
     await sequelize.sync({ force: true });
     console.log("Tabla 'Cars' sincronizada correctamente.");
 
-    //* Funcion para crear todos los registros de una
+    //* Función para crear todos los registros de una
     await CarModel.bulkCreate(autosDeLujo);
     console.log(
-      "¡Seeding completado! Tus naves de lujo ya están en la base de datos.",
+      "¡Seeding completado! Tus 15 naves de lujo ya están en la base de datos.",
     );
 
     //* Se corta el proceso
