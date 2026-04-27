@@ -47,5 +47,5 @@ export const CarProvider = ({ children }) => {
   return <CarContext.Provider value={value}>{chilsdren}</CarContext.Provider>;
 };
 
-// 5. Hook personalizado para usar el contexto
+//* Hook personalizado para usar el contexto
 export const useCars = () => useContext(CarContext);
