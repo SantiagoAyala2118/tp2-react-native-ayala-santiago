@@ -12,18 +12,16 @@ export const carReducer = (state, action) => {
       //* Busca el auto por id y lo reemplaza con los datos nuevos
       return {
         ...state,
-        cars: state.cars.map((car) => {
-          car.id === action.payload ? action.payload : car;
-        }),
+        cars: state.cars.map((car) =>
+          car.id === action.payload ? action.payload : car,
+        ),
       };
 
     case "DELETE_CAR":
       //* Filtra por id y quita el auto
       return {
         ...state,
-        cars: state.cars.filter((car) => {
-          car.id !== action.payload;
-        }),
+        cars: state.cars.filter((car) => car.id !== action.payload),
       };
 
     case "SET_LOADING":

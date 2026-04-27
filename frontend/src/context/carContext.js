@@ -44,7 +44,7 @@ export const CarProvider = ({ children }) => {
     getCars, // para recargar la lista
   };
 
-  return <CarContext.Provider value={value}>{chilsdren}</CarContext.Provider>;
+  return <CarContext.Provider value={value}>{children}</CarContext.Provider>;
 };
 
 //* Hook personalizado para usar el contexto
