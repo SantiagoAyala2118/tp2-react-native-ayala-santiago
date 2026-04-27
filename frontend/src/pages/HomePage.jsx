@@ -1,46 +1,22 @@
-// pages/HomePage.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import VehicleCard from "../components/VehicleCard";
 import Loading from "../components/Loading";
 import FilterBar from "../components/FilterBar";
 import useFilter from "../hooks/useFilter";
 import CarForm from "../components/CarForm";
+import { useCars } from "../context/carContext";
 
 const HomePage = () => {
-  const [cars, setCars] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { cars, loading, error, showForm, vehicleToEdit, dispatch, getCars } =
+    useCars();
 
   //* Filtro
   const { query, setQuery, filtered } = useFilter(cars);
 
-  //* Formulario
-  const [showForm, setShowForm] = useState(false);
-  const [vehicleToEdit, setVehicleToEdit] = useState(null);
-
-  const getCars = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch("http://localhost:3000/api/cars");
-      const data = await response.json();
-      await new Promise((resolve) => setTimeout(resolve, 700));
-      setCars(data.data);
-    } catch (err) {
-      setError(true);
-      console.error("Error al traer los autos:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getCars();
-  }, []);
-
   //? Funcion para mostrar el formulario al editar un vehiculo
   const handleEdit = (vehicle) => {
-    setVehicleToEdit(vehicle);
-    setShowForm(true);
+    dispatch({ type: "SET_VEHICLE_TO_EDIT", payload: vehicle });
+    dispatch({ type: "SET_SHOW_FORM", payload: true });
   };
 
   //? Funcion para eliminar un vehiculo
@@ -50,9 +26,9 @@ const HomePage = () => {
         method: "DELETE",
       });
 
-      getCars();
+      dispatch({ type: "DELETE_CAR", payload: id });
     } catch (err) {
-      setError(true);
+      dispatch({ type: "SET_ERROR", payload: true });
       console.error("Error eliminando un vehiculo", err);
       return;
     }
@@ -60,8 +36,8 @@ const HomePage = () => {
 
   //? Funcion para cerrar el formulario
   const handleCloseForm = () => {
-    setShowForm(false);
-    setVehicleToEdit(null);
+    dispatch({ type: "SET_SHOW_FORM", payload: false });
+    dispatch({ type: "SET_VEHICLE_TO_EDIT", payload: null });
   };
 
   return (
@@ -108,8 +84,8 @@ const HomePage = () => {
           <button
             className="text-[11px] tracking-[1.5px] uppercase text-[#9BA8AB] px-6 py-2.5 rounded-xl border border-[#9BA8AB]/20 hover:border-[#9BA8AB]/40 hover:text-[#CCD0CF] transition-all"
             onClick={() => {
-              setShowForm(true);
-              setVehicleToEdit(null);
+              dispatch({ type: "SET_SHOW_FORM", payload: true });
+              dispatch({ type: "SET_VEHICLE_TO_EDIT", payload: null });
             }}
           >
             + Agregar vehículo
