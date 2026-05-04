@@ -2,13 +2,39 @@
 import { useState } from "react";
 
 const useCarForm = (vehicle = null, onSuccess) => {
+  const parseImagenes = (imagenes) => {
+    if (Array.isArray(imagenes)) return imagenes;
+
+    if (!imagenes) return [];
+
+    if (typeof imagenes === "string") {
+      try {
+        let parse = JSON.parse(imagenes);
+
+        if (typeof parse === "string") {
+          parse = JSON.parse(parse);
+        }
+
+        return Array.isArray(parse) ? parse : [];
+      } catch (error) {
+        const cleaned = imgData.replace(/[\[\]"'`]/g, "").trim();
+
+        return cleaned ? [cleaned] : [];
+      }
+    }
+
+    return [];
+  };
+
+  const imagenesLimpias = parseImagenes(vehicle?.imagenes);
+
   const [formData, setFormData] = useState({
     marca: vehicle?.marca ?? "",
     modelo: vehicle?.modelo ?? "",
     anio: vehicle?.anio ?? "",
     precio: vehicle?.precio ?? "",
     kilometraje: vehicle?.kilometraje ?? "",
-    imagen: vehicle?.imagenes?.[0] ?? "",
+    imagen: imagenesLimpias[0] ?? "",
     estado: vehicle?.estado ?? "Nuevo",
     descripcion: vehicle?.descripcion ?? "",
   });

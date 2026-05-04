@@ -31,7 +31,27 @@ export const CarProvider = ({ children }) => {
       const response = await fetch("http://localhost:3000/api/cars");
       const data = await response.json();
       await new Promise((resolve) => setTimeout(resolve, 700));
-      dispatch({ type: "SET_CARS", payload: data.data });
+
+      //* Soluciona el error de recibir strings en las imagenes de la base de datos
+      const autosParceados = data.data.map((car) => {
+        let imagenesArregladas = car.imagenes;
+
+        if (typeof car.imagenes === "string") {
+          try {
+            imagenesArregladas = JSON.parse(car.imagenes);
+          } catch (error) {
+            console.error(
+              "Error al parsear las imagenes recibidas de la base de datos",
+              error,
+            );
+            imagenesArregladas = [];
+          }
+        }
+
+        return { ...car, imagenes: imagenesArregladas };
+      });
+
+      dispatch({ type: "SET_CARS", payload: autosParceados });
     } catch (err) {
       dispatch({ type: "SET_ERROR", payload: true });
       console.error("Error al traer los autos:", err);
@@ -45,14 +65,13 @@ export const CarProvider = ({ children }) => {
   }, []);
 
   //* Todo lo que queremos compartir con la app
-  const value = useMemo(
-    {
+  const value = useMemo(() => {
+    return {
       ...state, // cars, loading, error, showForm, vehicleToEdit
       dispatch, // para despachar acciones
       getCars, // para recargar la lista
-    },
-    [state, getCars],
-  );
+    };
+  }, [state, getCars]);
 
   return <CarContext.Provider value={value}>{children}</CarContext.Provider>;
 };
