@@ -1,5 +1,5 @@
 // components/VehicleCard.jsx
-import { useState } from "react";
+import { useState, memo } from "react";
 import VehicleModal from "./VehicleModal";
 
 const VehicleCard = ({ data, onEdit, onDelete }) => {
@@ -123,4 +123,4 @@ const VehicleCard = ({ data, onEdit, onDelete }) => {
   );
 };
 
-export default VehicleCard;
+export default memo(VehicleCard);

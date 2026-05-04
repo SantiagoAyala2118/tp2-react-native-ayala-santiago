@@ -1,10 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, memo, useCallback } from "react";
 import VehicleCard from "../components/VehicleCard";
 import Loading from "../components/Loading";
 import FilterBar from "../components/FilterBar";
 import useFilter from "../hooks/useFilter";
 import CarForm from "../components/CarForm";
 import { useCars } from "../context/carContext";
+
+// const VehicleCardMemorizado = memo(VehicleCard);
 
 const HomePage = () => {
   const { cars, loading, error, showForm, vehicleToEdit, dispatch, getCars } =
@@ -14,25 +16,31 @@ const HomePage = () => {
   const { query, setQuery, filtered } = useFilter(cars);
 
   //? Funcion para mostrar el formulario al editar un vehiculo
-  const handleEdit = (vehicle) => {
-    dispatch({ type: "SET_VEHICLE_TO_EDIT", payload: vehicle });
-    dispatch({ type: "SET_SHOW_FORM", payload: true });
-  };
+  const handleEdit = useCallback(
+    (vehicle) => {
+      dispatch({ type: "SET_VEHICLE_TO_EDIT", payload: vehicle });
+      dispatch({ type: "SET_SHOW_FORM", payload: true });
+    },
+    [dispatch], //? Se redefine cuando se ejecuta algun cambio en la funcion
+  );
 
   //? Funcion para eliminar un vehiculo
-  const handleDelete = async (id) => {
-    try {
-      await fetch(`http://localhost:3000/api/car/remove/${id}`, {
-        method: "DELETE",
-      });
+  const handleDelete = useCallback(
+    async (id) => {
+      try {
+        await fetch(`http://localhost:3000/api/car/remove/${id}`, {
+          method: "DELETE",
+        });
 
-      dispatch({ type: "DELETE_CAR", payload: id });
-    } catch (err) {
-      dispatch({ type: "SET_ERROR", payload: true });
-      console.error("Error eliminando un vehiculo", err);
-      return;
-    }
-  };
+        dispatch({ type: "DELETE_CAR", payload: id });
+      } catch (err) {
+        dispatch({ type: "SET_ERROR", payload: true });
+        console.error("Error eliminando un vehiculo", err);
+        return;
+      }
+    },
+    [dispatch],
+  );
 
   //? Funcion para cerrar el formulario
   const handleCloseForm = () => {
